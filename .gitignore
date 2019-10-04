@@ -1,0 +1,23 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+*.csv
+__pycache__/
+local_settings.py
+db.sqlite3
+dump.rdb
+media/
+static_files/
+
+# ide
+.idea
+
+# environments
+.env
+
+# secret
+secrets.json
+
+# macOS
+*.DS_Store
