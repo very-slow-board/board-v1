@@ -44,7 +44,7 @@ class BoardDetailView(APIView):
          -
         ---
         returns:
-         - items
+         - item
            - pk
            - title
            - content
