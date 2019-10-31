@@ -14,16 +14,6 @@
           v-text="props.row.title"
         ></q-td>
         <q-td
-          key="writer"
-          :props="props"
-          v-text="props.row.writer"
-        ></q-td>
-        <q-td
-          key="writer"
-          :props="props"
-          v-text="props.row.createDttm"
-        ></q-td>
-        <q-td
           key="event"
           :props="props"
           class="text-grey-8 q-gutter-xs"
@@ -61,45 +51,34 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
       columns: [
         { name: 'title', align: 'center', label: '제목', field: 'title', sortable: true },
-        { name: 'writer', align: 'center', label: '작성자', field: 'writer', sortable: true },
-        { name: 'createDttm', align: 'center', label: '작성일', field: 'createDttm', sortable: true },
         { name: 'event', align: 'center', label: '', field: 'event', sortable: false }
-      ],
-      postList: [
-        {
-          id: 1,
-          title: '안녕하세요?',
-          writer: 'hayoung',
-          createDttm: '2019-10-04'
-        },
-        {
-          id: 2,
-          title: '안녕하세요??',
-          writer: 'hayoung',
-          createDttm: '2019-10-04'
-        },
-        {
-          id: 3,
-          title: '안녕하세요???',
-          writer: 'hayoung',
-          createDttm: '2019-10-04'
-        },
-        {
-          id: 4,
-          title: '안녕하세요????',
-          writer: 'hayoung',
-          createDttm: '2019-10-04'
-        }
       ]
+      // postList: []
     }
   },
 
+  computed: {
+    ...mapState('board', {
+      postList: state => state.postList
+    })
+  },
+
   methods: {
+    ...mapActions('board', [
+      'FETCH_POST_LIST'
+    ]),
+
+    fetch () {
+      this.FETCH_POST_LIST()
+    },
+
     editPost (post) {
       console.log('editPost event')
     },
@@ -107,6 +86,10 @@ export default {
     deletePost (post) {
       console.log('deletePost event')
     }
+  },
+
+  created () {
+    this.fetch()
   }
 }
 </script>
