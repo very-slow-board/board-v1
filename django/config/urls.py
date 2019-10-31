@@ -8,6 +8,8 @@ from rest_framework_swagger.views import get_swagger_view
 schema_view = get_swagger_view(title='엄청 느린 게시판') # api doc
 
 urlpatterns = [
+    path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
+    path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),  # Django JET dashboard URLS
     path('admin/', admin.site.urls),
 ]
 
